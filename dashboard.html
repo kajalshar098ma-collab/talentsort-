@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Sort Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body onload="loadDashboard()">
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <img src="logo.png" alt="Talent Sort Logo" class="logo-side">
+        </div>
+
+        <h2>Talent Sort</h2>
+
+        <button onclick="showPage('home')">🏠 Dashboard</button>
+        <button onclick="showPage('resume')">📄 Resume Builder</button>
+        <button onclick="showPage('savedResume')">📁 My Resume</button>
+        <button onclick="showPage('jobs')">💼 Apply Jobs</button>
+        <button onclick="showPage('score')">⭐ AI Resume Score</button>
+        <button onclick="showPage('interview')">📅 Interview Schedule</button>
+        <button onclick="showPage('chat')">🤖 AI Chatbot</button>
+        <button onclick="openCompanyPanel()">🏢 Company Panel</button>
+        <button onclick="showPage('admin')">🛠 Admin Panel</button>
+        <button onclick="showPage('profile')">👤 Profile</button>
+        <button onclick="downloadResume()">⬇ Download Resume</button>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <button onclick="logout()">🚪 Logout</button>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <!-- Home -->
+        <div class="page" id="home">
+
+            <img src="logo.png" class="dashboard-logo">
+
+            <h1>Welcome <span id="username"></span></h1>
+            <p>Smart Resume Builder + Direct Hiring Platform</p>
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <h3>Total Jobs</h3>
+                    <p>12+</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Applications</h3>
+                    <p id="totalJobs">0</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Resume Score</h3>
+                    <p id="scoreHome">0</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Resume Builder -->
+        <div class="page hidden" id="resume">
+            <h1>Create Professional Resume</h1>
+
+            <input type="text" id="rname" placeholder="Full Name">
+            <input type="number" id="rage" placeholder="Age">
+            <input type="text" id="rphone" placeholder="Phone Number">
+            <input type="email" id="remail" placeholder="Email">
+            <input type="text" id="raddress" placeholder="Address">
+
+            <input type="text" id="rskills" placeholder="Skills">
+            <input type="text" id="rhobby" placeholder="Hobbies">
+            <input type="text" id="redu" placeholder="Education">
+            <input type="text" id="rexp" placeholder="Experience">
+            <input type="text" id="rlanguage" placeholder="Languages Known">
+
+            <textarea id="robjective" placeholder="Career Objective"></textarea>
+
+            <button onclick="saveResume()">Save Resume</button>
+
+            <p id="resumeMsg"></p>
+        </div>
+
+        <!-- Saved Resume -->
+        <div class="page hidden" id="savedResume">
+            <h1>My Resume</h1>
+            <div id="resumeData"></div>
+        </div>
+
+        <!-- Apply Jobs -->
+        <div class="page hidden" id="jobs">
+            <h1>Apply Jobs</h1>
+
+            <div class="job-card">
+                Frontend Developer - Google
+                <button onclick="applyJob('Frontend Developer - Google')">Apply</button>
+            </div>
+
+            <div class="job-card">
+                Java Developer - Infosys
+                <button onclick="applyJob('Java Developer - Infosys')">Apply</button>
+            </div>
+
+            <div class="job-card">
+                Python Developer - TCS
+                <button onclick="applyJob('Python Developer - TCS')">Apply</button>
+            </div>
+
+            <div class="job-card">
+                UI Designer - Wipro
+                <button onclick="applyJob('UI Designer - Wipro')">Apply</button>
+            </div>
+
+            <p id="jobMsg"></p>
+        </div>
+
+        <!-- Resume Score -->
+        <div class="page hidden" id="score">
+            <h1>AI Resume Score</h1>
+            <h2>Your Score: <span id="scoreValue">0</span>/100</h2>
+            <button onclick="generateScore()">Check Score</button>
+        </div>
+
+        <!-- Interview -->
+        <div class="page hidden" id="interview">
+            <h1>Interview Schedule</h1>
+
+            <input type="date" id="intDate">
+            <input type="time" id="intTime">
+
+            <button onclick="scheduleInterview()">Schedule</button>
+
+            <p id="intMsg"></p>
+        </div>
+
+        <!-- Chat -->
+        <div class="page hidden" id="chat">
+            <h1>AI Career Assistant</h1>
+
+            <div class="chat-box" id="chatBox">
+                <div class="msg-admin">
+                    AI: Hello 👋 Ask me about jobs, resume, interviews or career guidance.
+                </div>
+            </div>
+
+            <input type="text" id="chatInput" placeholder="Type your question...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <!-- Admin -->
+        <div class="page hidden" id="admin">
+            <h1>Admin Panel</h1>
+
+            <h3>Total Users: <span id="totalUsers">0</span></h3>
+            <h3>Total Applications: <span id="adminJobs">0</span></h3>
+
+            <div id="applicationList"></div>
+        </div>
+
+        <!-- Profile -->
+        <div class="page hidden" id="profile">
+
+            <h1>My Profile</h1>
+
+            <div class="profile-box">
+
+                <div class="photo-box">
+                    <img id="profileImage" src="" alt="Profile">
+                </div>
+
+                <input type="file" onchange="uploadPhoto(event)">
+                <button onclick="savePhoto()">Save Photo</button>
+
+                <p><b>Name:</b> <span id="pname"></span></p>
+                <p><b>Email:</b> <span id="pemail"></span></p>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

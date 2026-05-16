@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Sort - Company Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <img src="logo.png" alt="Talent Sort Logo" class="logo-side">
+        </div>
+
+        <h2>Talent Sort</h2>
+
+        <button onclick="showCompanyPage('home')">🏠 Dashboard</button>
+        <button onclick="showCompanyPage('postjob')">📢 Post Job</button>
+        <button onclick="showCompanyPage('candidates')">👨‍💼 Candidates</button>
+        <button onclick="showCompanyPage('interviews')">📅 Interviews</button>
+        <button onclick="showCompanyPage('messages')">💬 Messages</button>
+        <button onclick="window.location='dashboard.html'">⬅ Back</button>
+        <button onclick="window.location='login.html'">🚪 Logout</button>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <!-- Home -->
+        <div class="page" id="home">
+
+            <img src="logo.png" class="dashboard-logo">
+
+            <h1>Welcome Company</h1>
+            <p>Manage hiring directly through Talent Sort.</p>
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <h3>Jobs Posted</h3>
+                    <p id="jobCount">0</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Applications</h3>
+                    <p id="appCount">0</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Interviews</h3>
+                    <p>5</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Post Job -->
+        <div class="page hidden" id="postjob">
+            <h1>Post New Job</h1>
+
+            <input type="text" id="jobTitle" placeholder="Job Title">
+            <input type="text" id="jobLocation" placeholder="Location">
+            <textarea id="jobDesc" placeholder="Job Description"></textarea>
+
+            <button onclick="postJob()">Post Job</button>
+
+            <div id="postedJobs"></div>
+        </div>
+
+        <!-- Candidates -->
+        <div class="page hidden" id="candidates">
+            <h1>Candidate Applications</h1>
+
+            <div id="candidateList"></div>
+        </div>
+
+        <!-- Interviews -->
+        <div class="page hidden" id="interviews">
+            <h1>Schedule Interview</h1>
+
+            <input type="text" id="candidateName" placeholder="Candidate Name">
+            <input type="date" id="interviewDate">
+            <input type="time" id="interviewTime">
+
+            <button onclick="scheduleCompanyInterview()">Schedule</button>
+
+            <p id="interviewMsg"></p>
+        </div>
+
+        <!-- Messages -->
+        <div class="page hidden" id="messages">
+            <h1>Company Chat</h1>
+
+            <div class="chat-box" id="companyChatBox">
+                <div class="msg-admin">
+                    System: Welcome to Talent Sort company support.
+                </div>
+            </div>
+
+            <input type="text" id="companyMsgInput" placeholder="Type Message">
+            <button onclick="sendCompanyMessage()">Send</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// PAGE SWITCH
+function showCompanyPage(id){
+
+let pages=document.querySelectorAll(".page");
+
+pages.forEach(function(page){
+page.classList.add("hidden");
+});
+
+document.getElementById(id).classList.remove("hidden");
+
+if(id==="candidates"){
+loadCandidates();
+}
+loadCounts();
+}
+
+// LOAD COUNTS
+function loadCounts(){
+
+let jobs=JSON.parse(localStorage.getItem("companyJobs")) || [];
+let apps=JSON.parse(localStorage.getItem("applications")) || [];
+
+document.getElementById("jobCount").innerHTML=jobs.length;
+document.getElementById("appCount").innerHTML=apps.length;
+}
+
+// POST JOB
+function postJob(){
+
+let title=document.getElementById("jobTitle").value;
+let location=document.getElementById("jobLocation").value;
+let desc=document.getElementById("jobDesc").value;
+
+if(title===""){
+alert("Enter Job Title");
+return;
+}
+
+let jobs=JSON.parse(localStorage.getItem("companyJobs")) || [];
+
+jobs.push({
+title:title,
+location:location,
+desc:desc
+});
+
+localStorage.setItem("companyJobs",JSON.stringify(jobs));
+
+document.getElementById("postedJobs").innerHTML += `
+<div class="job-card">
+<b>${title}</b><br>
+${location}<br>
+${desc}
+</div>
+`;
+
+document.getElementById("jobTitle").value="";
+document.getElementById("jobLocation").value="";
+document.getElementById("jobDesc").value="";
+
+loadCounts();
+}
+
+// LOAD CANDIDATES
+function loadCandidates(){
+
+let apps=JSON.parse(localStorage.getItem("applications")) || [];
+
+let html="";
+
+if(apps.length===0){
+
+html="<p>No applications yet.</p>";
+
+}else{
+
+apps.forEach(function(job,index){
+
+html += `
+<div class="job-card">
+Candidate ${index+1} applied for ${job}
+<button onclick="shortlist(${index})">Shortlist</button>
+</div>
+`;
+
+});
+}
+
+document.getElementById("candidateList").innerHTML=html;
+}
+
+// SHORTLIST
+function shortlist(index){
+alert("Candidate "+(index+1)+" shortlisted successfully!");
+}
+
+// INTERVIEW
+function scheduleCompanyInterview(){
+
+let name=document.getElementById("candidateName").value;
+let date=document.getElementById("interviewDate").value;
+let time=document.getElementById("interviewTime").value;
+
+document.getElementById("interviewMsg").innerHTML=
+"Interview scheduled for "+name+" on "+date+" at "+time;
+
+document.getElementById("interviewMsg").style.color="green";
+}
+
+// CHAT
+function sendCompanyMessage(){
+
+let msg=document.getElementById("companyMsgInput").value;
+
+if(msg==="") return;
+
+document.getElementById("companyChatBox").innerHTML += `
+<div class="msg-user">Company: ${msg}</div>
+<div class="msg-admin">System: Message sent successfully.</div>
+`;
+
+document.getElementById("companyMsgInput").value="";
+}
+
+// AUTO LOAD
+loadCounts();
+</script>
+
+</body>
+</html>

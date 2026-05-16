@@ -1,0 +1,373 @@
+/* =========================
+   TALENT SORT STYLE.CSS
+========================= */
+
+/* Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(135deg,#dff6ff,#eefbff);
+min-height:100vh;
+color:#222;
+}
+
+/* Hidden */
+.hidden{
+display:none;
+}
+
+/* ================= LOGIN / SIGNUP ================= */
+
+.container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.box{
+width:420px;
+max-width:100%;
+background:#fff;
+padding:35px;
+border-radius:22px;
+box-shadow:0 15px 35px rgba(0,0,0,0.12);
+text-align:center;
+}
+
+.logo{
+width:90px;
+height:90px;
+object-fit:contain;
+margin-bottom:15px;
+}
+
+.box h1{
+color:#00aaff;
+margin-bottom:10px;
+font-size:34px;
+}
+
+.box h2{
+margin-bottom:15px;
+}
+
+.box p{
+margin-top:10px;
+color:#555;
+}
+
+.box input{
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:12px;
+outline:none;
+font-size:15px;
+}
+
+.box input:focus{
+border-color:#00aaff;
+}
+
+.box button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:#00aaff;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.box button:hover{
+background:#008ecc;
+}
+
+.box a{
+color:#00aaff;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+display:flex;
+min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+width:280px;
+background:linear-gradient(to bottom,#00aaff,#008ecc);
+padding:20px;
+color:white;
+overflow-y:auto;
+}
+
+.sidebar-logo{
+text-align:center;
+margin-bottom:15px;
+}
+
+.logo-side{
+width:85px;
+height:85px;
+object-fit:contain;
+background:white;
+padding:8px;
+border-radius:50%;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:18px;
+font-size:28px;
+}
+
+.sidebar button{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:12px;
+background:white;
+color:#00aaff;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sidebar button:hover{
+background:#dff6ff;
+transform:translateX(4px);
+}
+
+/* Main */
+.main{
+flex:1;
+padding:25px;
+}
+
+/* Pages */
+.page{
+background:#fff;
+padding:25px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+animation:fadeIn .4s ease;
+}
+
+.page h1{
+color:#00aaff;
+margin-bottom:20px;
+}
+
+.page h2,
+.page h3{
+margin-bottom:15px;
+}
+
+.page p{
+line-height:1.7;
+margin-bottom:10px;
+}
+
+.page input,
+.page textarea{
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:12px;
+outline:none;
+font-size:15px;
+}
+
+.page input:focus,
+.page textarea:focus{
+border-color:#00aaff;
+}
+
+.page textarea{
+min-height:120px;
+resize:vertical;
+}
+
+.page button{
+padding:12px 22px;
+border:none;
+border-radius:12px;
+background:#00aaff;
+color:#fff;
+cursor:pointer;
+font-weight:bold;
+margin-top:10px;
+}
+
+.page button:hover{
+background:#008ecc;
+}
+
+/* Dashboard Logo */
+.dashboard-logo{
+width:100px;
+display:block;
+margin:0 auto 15px;
+}
+
+/* Stats */
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:20px;
+}
+
+.stat-box{
+background:#f4fbff;
+padding:22px;
+border-radius:16px;
+text-align:center;
+box-shadow:0 5px 12px rgba(0,0,0,0.05);
+}
+
+.stat-box h3{
+color:#00aaff;
+margin-bottom:10px;
+}
+
+/* Job Card */
+.job-card{
+background:#f4fbff;
+padding:18px;
+margin-top:12px;
+border-radius:14px;
+box-shadow:0 5px 12px rgba(0,0,0,0.05);
+font-weight:bold;
+line-height:1.6;
+}
+
+.job-card button{
+float:right;
+padding:8px 14px;
+margin-top:0;
+}
+
+/* Resume */
+.resume-card{
+background:#f8fcff;
+padding:25px;
+border-radius:16px;
+line-height:1.9;
+}
+
+.resume-card h2{
+color:#00aaff;
+margin-bottom:12px;
+}
+
+/* Profile */
+.profile-box{
+text-align:center;
+}
+
+.photo-box{
+width:180px;
+height:180px;
+margin:auto;
+border:3px solid #00aaff;
+border-radius:14px;
+overflow:hidden;
+background:#f4fbff;
+}
+
+.photo-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* Chat */
+.chat-box{
+height:320px;
+overflow-y:auto;
+background:#f8fcff;
+padding:15px;
+border-radius:14px;
+margin-bottom:15px;
+}
+
+.msg-user{
+background:#00aaff;
+color:#fff;
+padding:10px;
+border-radius:12px;
+margin:8px 0;
+text-align:right;
+}
+
+.msg-admin{
+background:#eaf8ff;
+padding:10px;
+border-radius:12px;
+margin:8px 0;
+}
+
+/* Dark Mode */
+.dark-mode{
+background:#111 !important;
+color:#fff !important;
+}
+
+.dark-mode .page,
+.dark-mode .box{
+background:#222;
+color:#fff;
+}
+
+.dark-mode input,
+.dark-mode textarea{
+background:#333;
+color:#fff;
+border:1px solid #555;
+}
+
+/* Animation */
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* Responsive */
+@media(max-width:900px){
+
+.dashboard{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+.main{
+padding:15px;
+}
+}
